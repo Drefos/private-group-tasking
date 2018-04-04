@@ -21,6 +21,7 @@ public class User {
     private String password;
     @Email
     private String email;
+    private Group group;
 
     public User() {
     }
@@ -70,5 +71,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
