@@ -21,10 +21,10 @@ public class Task {
     public Task() {
     }
 
-    public Task(@NotEmpty String title, @NotEmpty String description, @NotEmpty TaskState state) {
+    public Task(@NotEmpty String title, @NotEmpty String description) {
         this.title = title;
         this.description = description;
-        this.state = state;
+        this.state = TaskState.TO_DO;
     }
 
     public Long getId() {

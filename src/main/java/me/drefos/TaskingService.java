@@ -40,7 +40,7 @@ public class TaskingService implements CommandLineRunner {
     
         System.out.println("\n\n" + user + "\n\n");
     
-        Task task = new Task("Title task", "description", TaskState.TO_DO);
+        Task task = new Task("Title task", "description");
         taskRepository.save(task);
     
         System.out.println("\n\n" + task + "\n\n");
@@ -62,10 +62,10 @@ public class TaskingService implements CommandLineRunner {
     
     
         System.out.println("\n\n" + fromdb.getId() + "\n\n");
-//        System.out.println("\n\n" + fromdb.getName() + "\n\n");
-//        System.out.println("\n\n" + fromdb.getAdmin() + "\n\n");
-//        System.out.println("\n\n" + fromdb.getUsers() + "\n\n");
-//        System.out.println("\n\n" + fromdb.getTasks() + "\n\n");
+        System.out.println("\n\n" + fromdb.getName() + "\n\n");
+        System.out.println("\n\n" + fromdb.getAdmin() + "\n\n");
+        System.out.println("\n\n" + fromdb.getUsers() + "\n\n");
+        System.out.println("\n\n" + fromdb.getTasks() + "\n\n");
         
     }
 }
