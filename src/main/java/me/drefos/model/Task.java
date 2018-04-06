@@ -1,28 +1,27 @@
 package me.drefos.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "tasks")
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotEmpty
     private String title;
-    @NotNull
+    @NotEmpty
     private String description;
     @NotNull
-    TaskState state;
+    private TaskState state;
 
     public Task() {
     }
 
-    public Task(@NotNull String title, @NotNull String description, @NotNull TaskState state) {
+    public Task(@NotEmpty String title, @NotEmpty String description, @NotEmpty TaskState state) {
         this.title = title;
         this.description = description;
         this.state = state;
@@ -58,5 +57,15 @@ public class Task {
 
     public void setState(TaskState state) {
         this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", state=" + state +
+                '}';
     }
 }

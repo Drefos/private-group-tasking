@@ -1,17 +1,20 @@
 package me.drefos.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
-public class User {
+@Table(name = "users")
+public class User implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
     private Long id;
     @NotEmpty
     private String firstName;
@@ -21,7 +24,8 @@ public class User {
     private String password;
     @Email
     private String email;
-    private Group group;
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    private List<Group> groups = new ArrayList<>();;
 
     public User() {
     }
@@ -73,11 +77,23 @@ public class User {
         this.email = email;
     }
 
-    public Group getGroup() {
-        return group;
+    public List<Group> getGroups() {
+        return groups;
     }
 
-    public void setGroup(Group group) {
-        this.group = group;
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+//                ", groups=" + groups +
+                '}';
     }
 }
