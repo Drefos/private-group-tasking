@@ -20,12 +20,12 @@ public class Group implements Serializable{
     @NotNull
     @ManyToOne
     private User admin;
-    @ManyToMany(fetch = FetchType.EAGER) //<<====================
+    @ManyToMany //<<====================
     @JoinTable(name = "group_users",
         joinColumns = {@JoinColumn(name = "group_id", referencedColumnName = "Id_group")},
         inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id_user")})
     private List<User> users = new ArrayList<>();
-    @OneToMany(fetch = FetchType.EAGER) //<<=====================
+    @OneToMany
     @JoinColumn(name = "group_id", referencedColumnName = "id_group")
     private List<Task> tasks = new ArrayList<>();
 

@@ -5,7 +5,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -24,7 +23,7 @@ public class User implements Serializable{
     private String password;
     @Email
     private String email;
-    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "users")
     private List<Group> groups = new ArrayList<>();;
 
     public User() {
