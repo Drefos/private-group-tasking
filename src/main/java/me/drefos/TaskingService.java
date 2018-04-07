@@ -2,11 +2,12 @@ package me.drefos;
 
 import me.drefos.model.Group;
 import me.drefos.model.Task;
-import me.drefos.model.TaskState;
 import me.drefos.model.User;
+import me.drefos.model.UserRole;
 import me.drefos.repository.GroupRepository;
 import me.drefos.repository.TaskRepository;
 import me.drefos.repository.UserRepository;
+import me.drefos.repository.UserRoleRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
@@ -15,26 +16,35 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class TaskingService implements CommandLineRunner {
+    private static final String DEFAULT_ROLE = "ROLE_USER";
     
     private final UserRepository userRepository;
     
     private final TaskRepository taskRepository;
     
     private final GroupRepository groupRepository;
+
+    private final UserRoleRepository roleRepository;
     
-    public TaskingService(UserRepository userRepository, TaskRepository taskRepository, GroupRepository groupRepository) {
+    public TaskingService(UserRepository userRepository, TaskRepository taskRepository, GroupRepository groupRepository, UserRoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.taskRepository = taskRepository;
         this.groupRepository = groupRepository;
+        this.roleRepository = roleRepository;
     }
     
     @Override
     public void run(String... args) {
+        UserRole defaultRole = roleRepository.findByRole(DEFAULT_ROLE);
+
         User user = new User("Adam", "Szepan", "pass", "em@il.pl");
+        user.setRole(defaultRole);
         userRepository.save(user);
     
         User[] users = new User[]{new User("Kamil", "Nowak", "haslo", "mai@le.pl"),
                 new User("Ola", "Kowalska", "koń", "majl@grr.pl")};
+        users[0].setRole(defaultRole);
+        users[1].setRole(defaultRole);
         userRepository.save(users[0]);
         userRepository.save(users[1]);
     

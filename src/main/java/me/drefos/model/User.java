@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable{
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,9 @@ public class User implements Serializable{
     @Email
     private String email;
     @ManyToMany(mappedBy = "users")
-    private List<Group> groups = new ArrayList<>();;
+    private List<Group> groups = new ArrayList<>();
+    @ManyToOne
+    private UserRole role;
 
     public User() {
     }
@@ -84,6 +86,14 @@ public class User implements Serializable{
         this.groups = groups;
     }
 
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -93,6 +103,7 @@ public class User implements Serializable{
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
 //                ", groups=" + groups +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

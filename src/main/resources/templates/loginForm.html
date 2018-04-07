@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Please Login</title>
+</head>
+<body>
+    <h1>Please Login</h1>
+    <form action="/processlogin" th:action="@{/processlogin}" method="post">
+        <input name="email" placeholder="Email" /><br/>
+        <input name="password" type="password" placeholder="Password" /><br/>
+        <input type="submit" value="Login" />
+    </form>
+    <br/><br/>
+    <p>Haven't you had an account yet? <a href="/register">Sing in here!</a></p>
+</body>
+</html>
